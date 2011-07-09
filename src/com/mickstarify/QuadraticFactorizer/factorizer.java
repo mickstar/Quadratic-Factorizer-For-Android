@@ -31,7 +31,7 @@ public class factorizer {
 		//Euclid
 		int r = m % n;
 		if (r == 0){
-			return r;
+			return n;
 		}
 		else {
 			return GCD (n, r);
