@@ -4,6 +4,8 @@
 
 package com.mickstarify.QuadraticFactorizer;
 
+import android.util.Log;
+
 public class factorizer {
 	private static final String TAG = "myFactorizer";
 	
@@ -131,8 +133,8 @@ public class factorizer {
 			
 			int divisor = a;
 			
-			int gcd0 = GCD (f0, a); //Greatest common Factor
-			int gcd1 = GCD (f1, a);
+			int gcd0 = GCD (f0, divisor); //Greatest common Factor
+			int gcd1 = GCD (f1, divisor);
 			
 			int r0 = a, r1 = a; //remainders
 			
@@ -146,17 +148,20 @@ public class factorizer {
 					divisor = divisor / gcd0;					
 				}
 			}
+			// Otherwise, we'll use GCD1
 			else {
 				if (divisor == gcd1){
-					f1 = f1 / gcd1;
+					f1 = f1 / gcd1; r0 = r0 / gcd1;
 					return String.format("(%dn %c %d)(n %c %d)", a, signOf(f0), absVal(f0), signOf(f1), absVal(f1));
 				}
 				else {
-					f1 = f1 / gcd1;
+					f1 = f1 / gcd1; r1 = r1 / gcd1;
 					divisor = divisor / gcd1;					
 				}
 			}
-
+			gcd0 = GCD (f0, divisor);
+			gcd1 = GCD (f1, divisor);
+			
 			if (gcd0 >= gcd1){
 				if (divisor == gcd0){
 					f0 = f0 / gcd0;  r0 = r0 / gcd0;
