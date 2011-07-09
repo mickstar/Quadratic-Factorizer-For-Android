@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:visibility="visible">
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:id="@+id/llTitle" android:layout_width="match_parent"
+		android:orientation="vertical">
+		<TextView android:id="@+id/txtTitle" android:layout_height="wrap_content"
+			android:text="Quadratic Factorizer" android:textSize="24dp"
+			android:layout_width="wrap_content" android:layout_gravity="center"
+			android:paddingTop="8dp" android:paddingBottom="8dp"></TextView>
+	</LinearLayout>
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:id="@+id/llExampleEquation" android:layout_width="match_parent"
+		android:orientation="vertical" android:layout_marginBottom="8dp">
+		<TextView android:id="@+id/textView1" android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_gravity="center" android:textSize="30dp" android:text="An² + Bn + C"></TextView>
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/llEquationEntry"
+		android:layout_width="match_parent" android:baselineAligned="false"
+		android:layout_height="wrap_content" android:layout_marginLeft="4dp"
+		android:layout_marginRight="4dp" android:layout_marginBottom="8dp">
+
+		<EditText android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:id="@+id/valxSquaredQuantity"
+			android:layout_weight="1" android:text="1"
+			android:gravity="center" android:inputType="numberDecimal" android:digits="123456789-">
+			<requestFocus></requestFocus>
+		</EditText>
+
+		<TextView android:id="@+id/txtxSquaredQuantity"
+			android:layout_height="wrap_content" android:text="n²"
+			android:textSize="28dp" android:layout_gravity="center_vertical"
+			android:layout_width="wrap_content"></TextView>
+
+		<Button android:id="@+id/btnFirstSign" android:text="+"
+			android:textSize="24dp" android:layout_width="wrap_content"
+			android:layout_height="wrap_content"></Button>
+
+		<EditText android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:id="@+id/valXQuantity"
+			android:layout_weight="1" android:inputType="number"
+			android:layout_gravity="center" android:gravity="center"
+			android:text="1"></EditText>
+
+		<TextView android:id="@+id/txtxQuantity"
+			android:layout_height="wrap_content" android:text="n"
+			android:textSize="28dp" android:layout_gravity="center_vertical"
+			android:layout_width="wrap_content"></TextView>
+
+		<Button android:layout_width="wrap_content" android:id="@+id/btnSecondSign"
+			android:text="+" android:textSize="24dp" android:layout_height="wrap_content"></Button>
+
+		<EditText android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:id="@+id/valCAmount"
+			android:layout_weight="1" android:inputType="number" android:text="0"
+			android:gravity="center"></EditText>
+
+	</LinearLayout>
+
+	<LinearLayout android:id="@+id/llCalculate"
+		android:layout_width="match_parent" android:orientation="vertical"
+		android:layout_height="wrap_content" android:layout_gravity="center"
+		android:layout_marginBottom="20dp">
+		<Button android:textSize="20dp" android:layout_gravity="center"
+			android:layout_width="wrap_content" android:id="@+id/btnCalculate"
+			android:text="Calculate" android:layout_height="60dp"></Button>
+		<TextView android:id="@+id/txtResults"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="Fill in the values for A,B,C respectively"
+			android:maxLines="3" android:textSize="24dp" android:gravity="center" android:layout_gravity="center"></TextView>
+	</LinearLayout>
+
+	<LinearLayout android:layout_height="wrap_content"
+		android:id="@+id/llRoots" android:layout_width="match_parent"
+		android:orientation="vertical" android:visibility="invisible">
+		<TextView android:id="@+id/txtRootsForN" android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal" android:layout_width="wrap_content"
+			android:text="Roots For n" android:textSize="24dp"></TextView>
+		<TextView android:id="@+id/txtRoot0ForN" android:layout_height="wrap_content"
+	android:layout_gravity="center_horizontal" android:layout_width="wrap_content"
+	android:textSize="20dp" android:text="unknown"></TextView>
+		<TextView android:id="@+id/txtRoot1ForN" android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal" android:layout_width="wrap_content"
+			android:textSize="20dp" android:text="unknown"></TextView>
+	</LinearLayout>
+
+</LinearLayout>
