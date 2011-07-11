@@ -29,7 +29,8 @@
 		<EditText android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:id="@+id/valxSquaredQuantity"
 			android:layout_weight="1" android:text="1"
-			android:gravity="center" android:inputType="numberDecimal" android:digits="123456789-">
+			android:gravity="center" 
+android:inputType="numberDecimal" android:digits="0123456789-">
 			<requestFocus></requestFocus>
 		</EditText>
 
