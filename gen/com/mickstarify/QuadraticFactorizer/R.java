@@ -14,19 +14,21 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class id {
-        public static final int btnCalculate=0x7f05000d;
+        public static final int btnCalculate=0x7f05000e;
+        public static final int btnClear=0x7f05000f;
         public static final int btnFirstSign=0x7f050007;
         public static final int btnSecondSign=0x7f05000a;
         public static final int llCalculate=0x7f05000c;
         public static final int llEquationEntry=0x7f050004;
         public static final int llExampleEquation=0x7f050002;
-        public static final int llRoots=0x7f05000f;
+        public static final int llRoots=0x7f050011;
         public static final int llTitle=0x7f050000;
-        public static final int textView1=0x7f050003;
-        public static final int txtResults=0x7f05000e;
-        public static final int txtRoot0ForN=0x7f050011;
-        public static final int txtRoot1ForN=0x7f050012;
-        public static final int txtRootsForN=0x7f050010;
+        public static final int relativeLayout1=0x7f05000d;
+        public static final int txtEquationExample=0x7f050003;
+        public static final int txtResults=0x7f050010;
+        public static final int txtRoot0ForN=0x7f050013;
+        public static final int txtRoot1ForN=0x7f050014;
+        public static final int txtRootsForN=0x7f050012;
         public static final int txtTitle=0x7f050001;
         public static final int txtxQuantity=0x7f050009;
         public static final int txtxSquaredQuantity=0x7f050006;

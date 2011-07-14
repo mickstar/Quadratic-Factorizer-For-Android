@@ -121,10 +121,10 @@ public class factorizer {
 		if (f0 == 0 && f1 == 0){ return "NaN"; }
 		if (a == 1){
 			if (f0 == 0){
-				return String.format("n(n %c %d)", signOf(f1), absVal(f1));
+				return String.format("x(x %c %d)", signOf(f1), absVal(f1));
 			}
 			else{
-				return String.format("(n %c %d)(n %c %d)", signOf(f0), absVal(f0), signOf(f1), absVal(f1));
+				return String.format("(x %c %d)(x %c %d)", signOf(f0), absVal(f0), signOf(f1), absVal(f1));
 			}
 		}
 		else {
@@ -141,7 +141,7 @@ public class factorizer {
 			if (gcd0 >= gcd1){
 				if (divisor == gcd0){
 					f0 = f0 / gcd0; r0 = r0 / gcd0;
-					return String.format("(n %c %d)(%dn %c %d)", signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1));
+					return String.format("(x %c %d)(%dx %c %d)", signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1));
 				}
 				else {
 					f0 = f0 / gcd0; r1 = r1 / gcd1;
@@ -152,7 +152,7 @@ public class factorizer {
 			else {
 				if (divisor == gcd1){
 					f1 = f1 / gcd1; r0 = r0 / gcd1;
-					return String.format("(%dn %c %d)(n %c %d)", a, signOf(f0), absVal(f0), signOf(f1), absVal(f1));
+					return String.format("(%dx %c %d)(x %c %d)", a, signOf(f0), absVal(f0), signOf(f1), absVal(f1));
 				}
 				else {
 					f1 = f1 / gcd1; r1 = r1 / gcd1;
@@ -165,20 +165,20 @@ public class factorizer {
 			if (gcd0 >= gcd1){
 				if (divisor == gcd0){
 					f0 = f0 / gcd0;  r0 = r0 / gcd0;
-					return String.format("(n %c %d)(%dn %c %d)", signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1));
+					return String.format("(x %c %d)(%dx %c %d)", signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1));
 				}
 				else {
-					return String.format("(%dn %c %d)(%dn %c %d)/%d", r0, signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1),divisor);				
+					return String.format("(%dx %c %d)(%dx %c %d)/%d", r0, signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1),divisor);				
 				}
 			}
 			else {
 				if (divisor == gcd1){
 					f1 = f1 / gcd1; r1 = r1 / gcd1;
-					return String.format("(%dn %c %d)(n %c %d)", r0, signOf(f0), absVal(f0), signOf(f1), absVal(f1));
+					return String.format("(%dx %c %d)(x %c %d)", r0, signOf(f0), absVal(f0), signOf(f1), absVal(f1));
 				}
 				else {
 					f1 = f1 / gcd1; r1 = r1 / gcd1;
-					return String.format("(%dn %c %d)(%dn %c %d)/%d", r0, signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1),divisor);			
+					return String.format("(%dx %c %d)(%dx %c %d)/%d", r0, signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1),divisor);			
 				}
 			}
 		}
