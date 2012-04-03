@@ -278,6 +278,8 @@ public class QuadraticFactorizerActivity extends Activity {
 	}
 
 	private void showError(String errorMsg) {
+		//Old Message box style error, quite intrusive
+		/*
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(errorMsg).setCancelable(false)
 				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -287,6 +289,9 @@ public class QuadraticFactorizerActivity extends Activity {
 				});
 		AlertDialog alert = builder.create();
 		alert.show();
-
+		 */
+		//Will replace with a more subtle error message
+		TextView equationOutput = (TextView) findViewById (R.id.txtResults);
+		equationOutput.setText ("Unable to factor");	
 	}
 }

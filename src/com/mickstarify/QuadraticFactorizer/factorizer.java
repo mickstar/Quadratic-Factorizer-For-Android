@@ -8,6 +8,7 @@ import android.util.Log;
 
 public class factorizer {
 	private static final String TAG = "myFactorizer";
+	private static final Boolean log = false;
 	
 	public final double NaN = 32133420.6984; //Magic number
 	
@@ -91,12 +92,12 @@ public class factorizer {
 			return "NaN";
 		}
 		for (int i = 0; i < factorsFound; ++i){
-			//Log.v (TAG, "Testing " + factors[i][0] + " "+ factors[i][1]);
+			if (log) { Log.v (TAG, "Testing " + factors[i][0] + " "+ factors[i][1]); }
 			if (c > 0){
 				if ((factors[i][0] + factors[i][1]) == b){
 					f0 = factors[i][0];
 					f1 = factors[i][1];
-					//Log.v(TAG, f0 +" and " + f1 + " Satisfy a + b");
+					if (log) { Log.v(TAG, f0 +" and " + f1 + " Satisfy a + b"); }
 				}
 				else if ((factors[i][0] * -1) + (factors[i][1] *-1 ) == b){
 					f0 = factors[i][0] *-1;
@@ -133,25 +134,31 @@ public class factorizer {
 			
 			int divisor = a;
 			
-			int gcd0 = GCD (f0, divisor); //Greatest common Factor
+			//Greatest common Denominator
+			int gcd0 = GCD (f0, divisor); 
 			int gcd1 = GCD (f1, divisor);
 			
 			int r0 = a, r1 = a; //remainders
 			
+			if (log){
+				Log.v (TAG, "( " + r0 + "x" + " + " + f0 + ")");
+				Log.v (TAG, "( " + r1 + "x" + " + " + f1 + ")");
+				Log.v (TAG, "gcd0 " + gcd0  + " gcd1 " + gcd1 + " f0 " + f0 + " f1 "+ f1  + " r0 " + r0 + " r1-" + r1 + " div = " + divisor);
+			}
 			if (gcd0 >= gcd1){
 				if (divisor == gcd0){
 					f0 = f0 / gcd0; r0 = r0 / gcd0;
 					return String.format("(x %c %d)(%dx %c %d)", signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1));
 				}
 				else {
-					f0 = f0 / gcd0; r1 = r1 / gcd1;
+					f0 = f0 / gcd0; r0 = r0 / gcd0;
 					divisor = divisor / gcd0;					
 				}
 			}
 			// Otherwise, we'll use GCD1
 			else {
 				if (divisor == gcd1){
-					f1 = f1 / gcd1; r0 = r0 / gcd1;
+					f1 = f1 / gcd1; r1 = r1 / gcd1;
 					return String.format("(%dx %c %d)(x %c %d)", a, signOf(f0), absVal(f0), signOf(f1), absVal(f1));
 				}
 				else {
@@ -162,22 +169,30 @@ public class factorizer {
 			gcd0 = GCD (f0, divisor);
 			gcd1 = GCD (f1, divisor);
 			
+			if (log){
+				Log.v (TAG, "( " + r0 + "x" + " + " + f0 + ")");
+				Log.v (TAG, "( " + r1 + "x" + " + " + f1 + ")");
+				
+				Log.v (TAG, "gcd0 " + gcd0  + " gcd1 " + gcd1 + " f0 " + f0 + " f1 "+ f1  + " r0 " + r0 + " r1-" + r1 + " div = " + divisor);
+			}
 			if (gcd0 >= gcd1){
 				if (divisor == gcd0){
+					//r0  = r0 / gcd0;
 					f0 = f0 / gcd0;  r0 = r0 / gcd0;
-					return String.format("(x %c %d)(%dx %c %d)", signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1));
+					return String.format("(%dx %c %d)(%dx %c %d)",r0, signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1));
 				}
 				else {
+					//We have failed to properly factorize...
 					return String.format("(%dx %c %d)(%dx %c %d)/%d", r0, signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1),divisor);				
 				}
 			}
 			else {
 				if (divisor == gcd1){
 					f1 = f1 / gcd1; r1 = r1 / gcd1;
-					return String.format("(%dx %c %d)(x %c %d)", r0, signOf(f0), absVal(f0), signOf(f1), absVal(f1));
+					return String.format("(%dx %c %d)(%dx %c %d)", r0, signOf(f0),absVal(f0), r1, signOf(f1), absVal(f1));
 				}
 				else {
-					f1 = f1 / gcd1; r1 = r1 / gcd1;
+					//We have failed to properly factorize...
 					return String.format("(%dx %c %d)(%dx %c %d)/%d", r0, signOf(f0), absVal(f0), r1, signOf(f1), absVal(f1),divisor);			
 				}
 			}

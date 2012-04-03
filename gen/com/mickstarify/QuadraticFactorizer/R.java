@@ -14,32 +14,38 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class id {
-        public static final int btnCalculate=0x7f05000e;
-        public static final int btnClear=0x7f05000f;
-        public static final int btnFirstSign=0x7f050007;
-        public static final int btnSecondSign=0x7f05000a;
-        public static final int llCalculate=0x7f05000c;
-        public static final int llEquationEntry=0x7f050004;
-        public static final int llExampleEquation=0x7f050002;
-        public static final int llRoots=0x7f050011;
-        public static final int llTitle=0x7f050000;
-        public static final int relativeLayout1=0x7f05000d;
-        public static final int txtEquationExample=0x7f050003;
-        public static final int txtResults=0x7f050010;
-        public static final int txtRoot0ForN=0x7f050013;
-        public static final int txtRoot1ForN=0x7f050014;
-        public static final int txtRootsForN=0x7f050012;
-        public static final int txtTitle=0x7f050001;
-        public static final int txtxQuantity=0x7f050009;
-        public static final int txtxSquaredQuantity=0x7f050006;
-        public static final int valCAmount=0x7f05000b;
-        public static final int valXQuantity=0x7f050008;
-        public static final int valxSquaredQuantity=0x7f050005;
+        public static final int btnCalculate=0x7f06000e;
+        public static final int btnClear=0x7f06000f;
+        public static final int btnFirstSign=0x7f060007;
+        public static final int btnSecondSign=0x7f06000a;
+        public static final int llCalculate=0x7f06000c;
+        public static final int llEquationEntry=0x7f060004;
+        public static final int llExampleEquation=0x7f060002;
+        public static final int llRoots=0x7f060011;
+        public static final int llTitle=0x7f060000;
+        public static final int relativeLayout1=0x7f06000d;
+        public static final int txtEquationExample=0x7f060003;
+        public static final int txtResults=0x7f060010;
+        public static final int txtRoot0ForN=0x7f060013;
+        public static final int txtRoot1ForN=0x7f060014;
+        public static final int txtRootsForN=0x7f060012;
+        public static final int txtTitle=0x7f060001;
+        public static final int txtxQuantity=0x7f060009;
+        public static final int txtxSquaredQuantity=0x7f060006;
+        public static final int valCAmount=0x7f06000b;
+        public static final int valXQuantity=0x7f060008;
+        public static final int valxSquaredQuantity=0x7f060005;
     }
     public static final class layout {
         public static final int main=0x7f030000;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
+    }
+    public static final class style {
+        /**  Any customizations for your app running on pre-3.0 devices here 
+ Any customizations for your app running on devices with Theme.Holo here 
+         */
+        public static final int MyTheme=0x7f050000;
     }
 }

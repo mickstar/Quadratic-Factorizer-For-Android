@@ -4,28 +4,39 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:visibility="visible">
 
-	<LinearLayout android:layout_height="wrap_content"
-		android:id="@+id/llTitle" android:layout_width="match_parent"
-		android:orientation="vertical">
+	<LinearLayout
+	    android:id="@+id/llTitle"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" >
+
 		<TextView android:id="@+id/txtTitle" android:layout_height="wrap_content"
 			android:text="Quadratic Factorizer" android:textSize="24dp"
 			android:layout_width="wrap_content" android:layout_gravity="center"
 			android:paddingTop="8dp" android:paddingBottom="8dp"></TextView>
 	</LinearLayout>
 
-	<LinearLayout android:layout_height="wrap_content"
-		android:id="@+id/llExampleEquation" android:layout_width="match_parent"
-		android:orientation="vertical" android:layout_marginBottom="8dp">
+	<LinearLayout
+	    android:id="@+id/llExampleEquation"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="8dp"
+	    android:orientation="vertical" >
+
 		<TextView android:id="@+id/txtEquationExample"
 			android:layout_height="wrap_content" android:layout_width="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceMedium"
 			android:layout_gravity="center" android:textSize="30dp" android:text="Ax² + Bx + C"></TextView>
 	</LinearLayout>
 
-	<LinearLayout android:id="@+id/llEquationEntry"
-		android:layout_width="match_parent" android:baselineAligned="false"
-		android:layout_height="wrap_content" android:layout_marginLeft="4dp"
-		android:layout_marginRight="4dp" android:layout_marginBottom="8dp">
+	<LinearLayout
+	    android:id="@+id/llEquationEntry"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginBottom="8dp"
+	    android:layout_marginLeft="4dp"
+	    android:layout_marginRight="4dp"
+	    android:baselineAligned="false" >
 
 		<EditText android:layout_height="wrap_content"
 			android:layout_width="wrap_content" android:id="@+id/valxSquaredQuantity"
@@ -64,12 +75,19 @@
 
 	</LinearLayout>
 
-	<LinearLayout android:id="@+id/llCalculate"
-		android:layout_width="match_parent" android:orientation="vertical"
-		android:layout_height="wrap_content" android:layout_gravity="center"
-		android:layout_marginBottom="20dp">
-		<RelativeLayout android:layout_height="wrap_content"
-			android:layout_width="match_parent" android:id="@+id/relativeLayout1">
+	<LinearLayout
+	    android:id="@+id/llCalculate"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:layout_marginBottom="20dp"
+	    android:orientation="vertical" >
+
+		<RelativeLayout
+		    android:id="@+id/relativeLayout1"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content" >
+
 			<Button android:textSize="20dp" android:layout_gravity="center"
 				android:layout_width="wrap_content" android:id="@+id/btnCalculate"
 				android:text="Calculate" android:layout_height="60dp"
@@ -86,9 +104,13 @@
 			android:layout_gravity="center"></TextView>
 	</LinearLayout>
 
-	<LinearLayout android:layout_height="wrap_content"
-		android:id="@+id/llRoots" android:layout_width="match_parent"
-		android:orientation="vertical" android:visibility="invisible">
+	<LinearLayout
+	    android:id="@+id/llRoots"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:visibility="invisible" >
+
 		<TextView android:id="@+id/txtRootsForN"
 			android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
 			android:layout_width="wrap_content" android:text="Roots For n"
