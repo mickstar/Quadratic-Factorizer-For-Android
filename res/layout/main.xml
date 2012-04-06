@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:layout_width="fill_parent"
-	android:layout_height="fill_parent" android:visibility="visible">
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible" >
 
 	<LinearLayout
 	    android:id="@+id/llTitle"
@@ -11,7 +12,7 @@
 	    android:orientation="vertical" >
 
 		<TextView android:id="@+id/txtTitle" android:layout_height="wrap_content"
-			android:text="Quadratic Factorizer" android:textSize="24dp"
+			android:text="@string/app_name" android:textSize="24dp"
 			android:layout_width="wrap_content" android:layout_gravity="center"
 			android:paddingTop="8dp" android:paddingBottom="8dp"></TextView>
 	</LinearLayout>
@@ -38,40 +39,72 @@
 	    android:layout_marginRight="4dp"
 	    android:baselineAligned="false" >
 
-		<EditText android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:id="@+id/valxSquaredQuantity"
-			android:layout_weight="1" android:text="1" android:gravity="center"
-			android:inputType="numberDecimal" android:digits="0123456789-">
+		<EditText
+		    android:id="@+id/txtATerm"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_weight="1"
+		    android:digits="0123456789-"
+		    android:gravity="center"
+		    android:inputType="numberDecimal"
+		    android:text="1" >
+
 			<requestFocus></requestFocus>
 		</EditText>
 
-		<TextView android:id="@+id/txtxSquaredQuantity"
+		<TextView android:id="@+id/lblXSquared"
 			android:layout_height="wrap_content" android:text="x²"
 			android:textSize="28dp" android:layout_gravity="center_vertical"
-			android:layout_width="wrap_content"></TextView>
+			android:layout_width="wrap_content">
+		</TextView>
 
-		<Button android:id="@+id/btnFirstSign" android:text="+"
-			android:textSize="24dp" android:layout_width="wrap_content"
-			android:layout_height="wrap_content"></Button>
+		<Button
+		    android:id="@+id/btnFirstSign"
+		    android:layout_width="40dp"
+		    android:layout_height="match_parent"
+		    android:text="+"
+		    android:textSize="24dp" >
 
-		<EditText android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:id="@+id/valXQuantity"
-			android:layout_weight="1" android:inputType="number"
-			android:layout_gravity="center" android:gravity="center"
-			android:text="1"></EditText>
+		</Button>
 
-		<TextView android:id="@+id/txtxQuantity"
+		<EditText
+		    android:id="@+id/txtBTerm"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_gravity="center"
+		    android:layout_weight="1"
+		    android:digits="0123456789-"
+		    android:gravity="center"
+		    android:inputType="number"
+		    android:text="1" >
+
+		</EditText>
+
+		<TextView android:id="@+id/txtX"
 			android:layout_height="wrap_content" android:text="x"
 			android:textSize="28dp" android:layout_gravity="center_vertical"
-			android:layout_width="wrap_content"></TextView>
+			android:layout_width="wrap_content">
+		</TextView>
 
-		<Button android:layout_width="wrap_content" android:id="@+id/btnSecondSign"
-			android:text="+" android:textSize="24dp" android:layout_height="wrap_content"></Button>
+		<Button
+		    android:id="@+id/btnSecondSign"
+		    android:layout_width="40dp"
+		    android:layout_height="wrap_content"
+		    android:text="+"
+		    android:textSize="24dp" >
+</Button>
 
-		<EditText android:layout_height="wrap_content"
-			android:layout_width="wrap_content" android:id="@+id/valCAmount"
-			android:layout_weight="1" android:inputType="number" android:text="0"
-			android:gravity="center"></EditText>
+		<EditText
+		    android:id="@+id/txtCTerm"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:layout_weight="1"
+		    android:digits="0123456789-"
+		    android:gravity="center"
+		    android:inputType="number"
+		    android:text="0" >
+
+		</EditText>
 
 	</LinearLayout>
 
@@ -90,16 +123,16 @@
 
 			<Button android:textSize="20dp" android:layout_gravity="center"
 				android:layout_width="wrap_content" android:id="@+id/btnCalculate"
-				android:text="Calculate" android:layout_height="60dp"
+				android:text="@string/btnCalculate" android:layout_height="60dp"
 				android:layout_centerInParent="true"></Button>
 				
 			<Button android:layout_height="wrap_content"
-				android:layout_width="wrap_content" android:text="Clear"
+				android:layout_width="wrap_content" android:text="@string/btnClear"
 				android:id="@+id/btnClear" android:layout_alignParentRight="true" android:layout_centerVertical="true"></Button>
 
 		</RelativeLayout>
 		<TextView android:id="@+id/txtResults" android:layout_width="wrap_content"
-			android:layout_height="wrap_content" android:text="Fill in the values for A,B,C respectively"
+			android:layout_height="wrap_content" android:text="@string/txtInstructions"
 			android:maxLines="3" android:textSize="24dp" android:gravity="center"
 			android:layout_gravity="center"></TextView>
 	</LinearLayout>
@@ -113,7 +146,7 @@
 
 		<TextView android:id="@+id/txtRootsForN"
 			android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
-			android:layout_width="wrap_content" android:text="Roots For n"
+			android:layout_width="wrap_content" android:text="@string/rootsForX"
 			android:textSize="24dp"></TextView>
 		<TextView android:id="@+id/txtRoot0ForN"
 			android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
@@ -124,5 +157,23 @@
 			android:layout_width="wrap_content" android:textSize="20dp"
 			android:text="unknown"></TextView>
 	</LinearLayout>
+
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="bottom"
+	    android:layout_marginBottom="18dp"
+	    android:layout_weight="1"
+	    android:gravity="bottom" >
+
+		<Button
+		    android:id="@+id/btnWolframIt"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentTop="true"
+		    android:layout_centerHorizontal="true"
+		    android:text="@string/wolframIt" />
+
+	</RelativeLayout>
 
 </LinearLayout>
