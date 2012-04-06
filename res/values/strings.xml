@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Quadratic Factorizer</string>
+    <string name="wolframIt">Search With WolframAlpha</string>
+    <string name="btnCalculate">Calculate</string>
+    <string name="btnClear">Clear</string>
+    <string name="txtInstructions">Fill in the values for A,B,C respectively</string>
+    <string name="rootsForX">Roots For x</string>
 </resources>
