@@ -1,9 +1,11 @@
 package com.mickstarify.QuadraticFactorizer;
 
 import android.app.Activity;
-import android.app.AlertDialog;
+//import android.app.AlertDialog;
+//import android.content.DialogInterface;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import android.view.*;
@@ -16,11 +18,6 @@ import android.widget.EditText;
 
 public class QuadraticFactorizerActivity extends Activity {
 	/** Called when the activity is first created. */
-
-	Button Calculate;
-	Button firstSign, secondSign;
-
-	EditText xSquaredQuantity, xQuantity, cAmount;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,129 +33,133 @@ public class QuadraticFactorizerActivity extends Activity {
 		return false;
 	}
 
-	private void calculate() {
-		xSquaredQuantity = (EditText) findViewById(R.id.valxSquaredQuantity);
-		xQuantity = (EditText) findViewById(R.id.valXQuantity);
-		cAmount = (EditText) findViewById(R.id.valCAmount);
-
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		// Hides the Soft Keyboard
-		imm.hideSoftInputFromWindow(xSquaredQuantity.getWindowToken(), 0);
-		imm.hideSoftInputFromWindow(xQuantity.getWindowToken(), 0);
-		imm.hideSoftInputFromWindow(cAmount.getWindowToken(), 0);
-
-		int A, B, C;
-
-		try {
-			A = Integer.parseInt(xSquaredQuantity.getText().toString());
-		} catch (Exception e) {
-			showError("Error could not read the A Term");
-			return;
+	private int getATerm (){
+		TextView ATerm = (TextView) findViewById (R.id.txtATerm);
+		try{
+			return Integer.parseInt( String.valueOf( ATerm.getText() ) );
 		}
-		try {
-			B = Integer.parseInt(xQuantity.getText().toString());
-			if (!isPositive(firstSign)) {
-				B *= -1;
-			}
-		} catch (Exception e) {
-			showError("Error could not read the B term");
-			return;
+		catch (Exception e){
+			System.out.printf ("[QuadraticFactorizer]Error retrieving ATerm Value! %s", e);
+			//Will add an error prompt later
 		}
-		try {
-			C = Integer.parseInt(cAmount.getText().toString());
-			if (!isPositive(secondSign)) {
-				C *= -1;
-			}
-		} catch (Exception e) {
-			C = 0;
-		}
-
-		factorizer myFactorizer = new factorizer();
-		String factorised = myFactorizer.factorize(A, B, C);
-
-		TextView factorisedOutput = (TextView) findViewById(R.id.txtResults);
-		TextView root0ForN = (TextView) findViewById(R.id.txtRoot0ForN);
-		TextView root1ForN = (TextView) findViewById(R.id.txtRoot1ForN);
-		factorisedOutput.setText(factorised);
-
-		LinearLayout llRoots = (LinearLayout) findViewById(R.id.llRoots);
-
-		double[] roots = myFactorizer.rootsOf(A, B, C);
-
-		llRoots.setVisibility(View.VISIBLE);
-		if (roots[0] == myFactorizer.NaN) {
-			root0ForN.setText("NaN");
-		} else {
-			root0ForN.setText(String.format("%f", roots[0]));
-		}
-		if (roots[1] == myFactorizer.NaN) {
-			root1ForN.setText("NaN");
-		} else {
-			root1ForN.setText(String.format("%f", roots[1]));
-		}
-
-		updateEquation(A, B, C);
-
-		if (factorised == "NaN") {
-			showError("Sorry i could not factor the equation, perhaps it is unfactorable");
-		}
+		return 0;
 	}
-
-	private void init() {
-		Calculate = (Button) findViewById(R.id.btnCalculate);
-		firstSign = (Button) findViewById(R.id.btnFirstSign);
-		secondSign = (Button) findViewById(R.id.btnSecondSign);
-
-		Button clear = (Button) findViewById (R.id.btnClear);
+	private int getBTerm (){
+		TextView BTerm = (TextView) findViewById (R.id.txtBTerm);
+		Button BSign = (Button) findViewById (R.id.btnFirstSign);
 		
-		firstSign.setText("+");
-		secondSign.setText("+");
-
-		Calculate.setOnClickListener(new View.OnClickListener() {
+		int multiplier = 1;
+		
+		if (!isPositive ( BSign )){
+			//B Is Negative!
+			multiplier = -1;
+		}
+		
+		try{
+			return Integer.parseInt( String.valueOf( BTerm.getText() ) ) * multiplier;
+		}
+		catch (Exception e){
+			System.out.printf ("Error retrieving BTerm Value! %s", e);
+			//Will add an error prompt later
+		}
+		return 0;
+	}
+	private int getCTerm (){
+		TextView CTerm = (TextView) findViewById (R.id.txtCTerm);
+		Button CSign = (Button) findViewById (R.id.btnSecondSign);
+		
+		int multiplier = 1;
+		
+		if (!isPositive ( CSign )){
+			//B Is Negative!
+			multiplier = -1;
+		}
+		try{
+			return Integer.parseInt( String.valueOf( CTerm.getText() ) ) * multiplier;
+		}
+		catch (Exception e){
+			System.out.printf ("Error retrieving CTerm Value! %s", e);
+			//Will add an error prompt later
+		}
+		return 0;
+	}
+	
+	private void wolframAlphaSearch() {
+		int a = getATerm();
+		int b = getBTerm();
+		int c = getCTerm();
+		
+		String equation = makeEquation(a,b,c);
+		equation = equation.replaceAll(" ", "");
+		String url = String.format("http://www.wolframalpha.com/input/?i=%s", Uri.encode(equation));
+		
+		Intent i = new Intent(Intent.ACTION_VIEW);
+		i.setData(Uri.parse(url));
+		startActivity(i);
+	}
+	
+	private void init (){
+		//First we will declare all our buttons
+		
+		final Button btnCalculate = (Button) findViewById ( R.id.btnCalculate );
+		final Button btnWolframAlpha = (Button) findViewById ( R.id.btnWolframIt );
+		final Button btnFirstSign = (Button) findViewById ( R.id.btnFirstSign );
+		final Button btnSecondSign = (Button) findViewById ( R.id.btnSecondSign );
+		final Button btnClear = (Button) findViewById ( R.id.btnClear );
+		
+		
+		btnFirstSign.setText( "+" );
+		btnSecondSign.setText( "+" );
+		
+		btnCalculate.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				calculate();
 			}
 		});
-		firstSign.setOnClickListener(new View.OnClickListener() {
+		
+		btnWolframAlpha.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				if (isPositive(firstSign)) {
-					firstSign.setText("-");
-				} else {
-					firstSign.setText("+");
-				}
+				wolframAlphaSearch();
 			}
-		});
-		secondSign.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				if (isPositive(secondSign)) {
-					secondSign.setText("-");
-				} else {
-					secondSign.setText("+");
-				}
-			}
+
+			
 		});
 		
-		clear.setOnClickListener(new View.OnClickListener() {
+		btnClear.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				clearScreen();
 			}
 		});
-
-		final EditText ATerm = (EditText) findViewById(R.id.valxSquaredQuantity);
-		final EditText BTerm = (EditText) findViewById(R.id.valXQuantity);
-		final EditText CTerm = (EditText) findViewById(R.id.valCAmount);
-
-		final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		
-		ATerm.setOnClickListener(new View.OnClickListener() {
+		btnFirstSign.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				ATerm.setText ("");
-				imm.showSoftInput(ATerm, 0);
+				if (isPositive(btnFirstSign)) {
+					btnFirstSign.setText("-");
+				} else {
+					btnFirstSign.setText("+");
+				}
+			}
+		});
+		btnSecondSign.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				if (isPositive( btnSecondSign )) {
+					btnSecondSign.setText("-");
+				} else {
+					btnSecondSign.setText("+");
+				}
 			}
 		});
 		
+		//Now we need to set all the EditText actions
+		
+		final TextView ATerm = (TextView) findViewById (R.id.txtATerm);
+		final TextView BTerm = (TextView) findViewById (R.id.txtBTerm);
+		final TextView CTerm = (TextView) findViewById (R.id.txtCTerm);
+		
+		//We will use this to open/close the virtual keyboard
+		final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		
 		ATerm.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
 			public void onFocusChange(View v, boolean hasFocus) {
 				if (hasFocus == true) {
 					ATerm.setText("");
@@ -166,9 +167,7 @@ public class QuadraticFactorizerActivity extends Activity {
 				}
 			}
 		});
-
 		BTerm.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
 			public void onFocusChange(View v, boolean hasFocus) {
 				if (hasFocus == true) {
 					BTerm.setText("");
@@ -182,9 +181,7 @@ public class QuadraticFactorizerActivity extends Activity {
 				imm.showSoftInput(BTerm, 0);
 			}
 		});
-		
 		CTerm.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-
 			public void onFocusChange(View v, boolean hasFocus) {
 				if (hasFocus == true) {
 					CTerm.setText("");
@@ -198,64 +195,67 @@ public class QuadraticFactorizerActivity extends Activity {
 				imm.showSoftInput(CTerm, 0);
 			}
 		});
-
-	}
-
-	char signOfN(int n) {
-		if (n < 0) {
-			return '-';
-		}
-		return '+';
-	}
-
-	int absValOf (int n) {
-		if (n < 0){
-			return n * -1;
-		}
-		return n;
 	}
 	
-	private void updateEquation(int a, int b, int c) {
-		TextView equationView = (TextView) findViewById(R.id.txtEquationExample);
-
-		String fTerm, sTerm, equation; // First term...secondT...thirdTerm
-
-		if (a == 1) {
-			fTerm = "x²";
-		} else {
-			fTerm = String.format("%dx²", a);
+	private void calculate() {
+		int a = getATerm();
+		int b = getBTerm();
+		int c = getCTerm();
+		
+		updateEquationDisplay (a, b, c);
+		hideSoftKeyboard ();
+		
+		factorizer aFactorizer = new factorizer();
+		
+		String factorised = aFactorizer.factorize(a, b, c);
+		
+		TextView factorisedOutput = (TextView) findViewById (R.id.txtResults);
+		TextView txtRoot0 = (TextView) findViewById ( R.id.txtRoot0ForN);
+		TextView txtRoot1 = (TextView) findViewById ( R.id.txtRoot1ForN);
+		
+		if (factorised == "NaN"){
+			factorisedOutput.setText ("Unable to Factor");
 		}
-
-		if (b == 1) {
-			sTerm = "x";
-		} else {
-			sTerm = String.format("%dx", absValOf (b));
+		else{
+			factorisedOutput.setText (factorised);
 		}
-
-		if (c == 0) {
-			equation = String.format("%s %c %s", fTerm, signOfN(b), sTerm);
-		} else {
-			equation = String.format("%s %c %s %c %d", fTerm, signOfN(b),
-					sTerm, signOfN(c), absValOf (c));
+		
+		LinearLayout llRoots = (LinearLayout) findViewById(R.id.llRoots);
+		
+		llRoots.setVisibility(View.VISIBLE);
+		
+		double[] roots = aFactorizer.rootsOf(a, b, c);
+		
+		if (roots[0] == aFactorizer.NaN){
+			txtRoot0.setText("NaN");
 		}
-
-		equationView.setText(equation);
-
+		else{
+			txtRoot0.setText (String.valueOf(roots[0]));
+		}
+		if (roots[1] == aFactorizer.NaN){
+			txtRoot1.setText("NaN");
+		}
+		else{
+			txtRoot1.setText (String.valueOf(roots[0]));
+		}
+		
 	}
-
+	
 	private void clearScreen() {
 		final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		
+
 		TextView equationExample = (TextView) findViewById(R.id.txtEquationExample);
 		TextView fOutput = (TextView) findViewById(R.id.txtResults);
 
 		TextView txtRoot0 = (TextView) findViewById(R.id.txtRoot0ForN);
 		TextView txtRoot1 = (TextView) findViewById(R.id.txtRoot1ForN);
-
 		
-		final EditText ATerm = (EditText) findViewById(R.id.valxSquaredQuantity);
-		final EditText BTerm = (EditText) findViewById(R.id.valXQuantity);
-		final EditText CTerm = (EditText) findViewById(R.id.valCAmount);
+		Button firstSign = (Button) findViewById (R.id.btnFirstSign);
+		Button secondSign = (Button) findViewById (R.id.btnSecondSign);
+
+		final EditText ATerm = (EditText) findViewById(R.id.txtATerm);
+		final EditText BTerm = (EditText) findViewById(R.id.txtBTerm);
+		final EditText CTerm = (EditText) findViewById(R.id.txtCTerm);
 
 		firstSign.setText("+");
 		secondSign.setText("+");
@@ -263,35 +263,87 @@ public class QuadraticFactorizerActivity extends Activity {
 		equationExample.setText("Ax² + Bx + C");
 
 		ATerm.setText("1");
-		
+
 		BTerm.setText("");
 		BTerm.requestFocus();
 		imm.showSoftInput(BTerm, 0);
-		
+
 		CTerm.setText("0");
 
-		fOutput.setText("Fill in the values for A,B,C respectively");
+		fOutput.setText(R.string.txtInstructions);
 
 		txtRoot0.setText("");
 		txtRoot1.setText("");
 
+		}
+	
+	private void updateEquationDisplay ( int a, int b, int c){
+		String equation = makeEquation (a, b, c);
+		
+		TextView equationDisplay = (TextView) findViewById (R.id.txtEquationExample);
+		
+		equationDisplay.setText ( equation );		
+	}
+	
+	private String makeEquation ( int a, int b, int c){
+		String equation;
+		//We will produce each term and then combine them later
+		//Note that there are spaces after each term, this is so it can all seamlessly join together
+		//So that if b was empty, there wouldnt be a double space inbetween a & c
+		String firstTerm, secondTerm, thirdTerm;
+		
+		if (a == 0){
+			firstTerm = ""; //Empty, because 0x^2 will look stupid
+		}
+		else if (a == 1){
+			//Looks better than 1x^2
+			firstTerm = "x²";
+		}
+		else{
+			firstTerm = String.format("%dx² ", a );;
+		}
+		if (b == 0){
+			secondTerm = "";
+		}
+		//We have absolute values in b & c because we also have a sign infront which is either +/-
+		//This is so we can have a space between and don't get that ugly "+ -2" instead of "- 2"
+		else if (b == 1){
+			//- x instead of - 1x
+			secondTerm = String.format ("%c x ", getSign (b), Math.abs(b) );
+		}
+		else{
+			secondTerm = String.format ("%c %dx ", getSign (b), Math.abs(b) );
+		}
+		if (c == 0){
+			thirdTerm = "";
+		}
+		else{
+			thirdTerm = String.format("%c %d ", getSign (c), Math.abs(c) );
+		}
+		
+		//We will now put it all together!
+		equation = String.format ("%s%s%s", firstTerm, secondTerm, thirdTerm);
+		
+		return equation;
 	}
 
-	private void showError(String errorMsg) {
-		//Old Message box style error, quite intrusive
-		/*
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(errorMsg).setCancelable(false)
-				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						return;
-					}
-				});
-		AlertDialog alert = builder.create();
-		alert.show();
-		 */
-		//Will replace with a more subtle error message
-		TextView equationOutput = (TextView) findViewById (R.id.txtResults);
-		equationOutput.setText ("Unable to factor");	
+	private char getSign(int n) {
+		if (n >= 0){
+			return '+';
+		}
+		return '-';
+	}
+	
+	private void hideSoftKeyboard() {
+		final TextView ATerm = (TextView) findViewById (R.id.txtATerm);
+		final TextView BTerm = (TextView) findViewById (R.id.txtBTerm);
+		final TextView CTerm = (TextView) findViewById (R.id.txtCTerm);
+		
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
+		//Force close the keyboard for all textboxs, even though only one will have it open
+		imm.hideSoftInputFromWindow(ATerm.getWindowToken(), 0);
+		imm.hideSoftInputFromWindow(BTerm.getWindowToken(), 0);
+		imm.hideSoftInputFromWindow(CTerm.getWindowToken(), 0);
 	}
 }
