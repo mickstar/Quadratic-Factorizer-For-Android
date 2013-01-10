@@ -80,7 +80,7 @@
 
 		</EditText>
 
-		<TextView android:id="@+id/lblX"
+		<TextView android:id="@+id/txtX"
 			android:layout_height="wrap_content" android:text="x"
 			android:textSize="28dp" android:layout_gravity="center_vertical"
 			android:layout_width="wrap_content">
@@ -157,5 +157,23 @@
 			android:layout_width="wrap_content" android:textSize="20dp"
 			android:text="unknown"></TextView>
 	</LinearLayout>
+
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="bottom"
+	    android:layout_marginBottom="18dp"
+	    android:layout_weight="1"
+	    android:gravity="bottom" >
+
+		<Button
+		    android:id="@+id/btnWolframIt"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentTop="true"
+		    android:layout_centerHorizontal="true"
+		    android:text="@string/wolframIt" />
+
+	</RelativeLayout>
 
 </LinearLayout>

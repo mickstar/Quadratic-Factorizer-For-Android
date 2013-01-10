@@ -84,25 +84,10 @@ public class QuadraticFactorizerActivity extends Activity {
 		return 0;
 	}
 	
-	private void wolframAlphaSearch() {
-		int a = getATerm();
-		int b = getBTerm();
-		int c = getCTerm();
-		
-		String equation = makeEquation(a,b,c);
-		equation = equation.replaceAll(" ", "");
-		String url = String.format("http://www.wolframalpha.com/input/?i=%s", Uri.encode(equation));
-		
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(url));
-		startActivity(i);
-	}
-	
 	private void init (){
 		//First we will declare all our buttons
 		
 		final Button btnCalculate = (Button) findViewById ( R.id.btnCalculate );
-		final Button btnWolframAlpha = (Button) findViewById ( R.id.btnWolframIt );
 		final Button btnFirstSign = (Button) findViewById ( R.id.btnFirstSign );
 		final Button btnSecondSign = (Button) findViewById ( R.id.btnSecondSign );
 		final Button btnClear = (Button) findViewById ( R.id.btnClear );
@@ -115,14 +100,6 @@ public class QuadraticFactorizerActivity extends Activity {
 			public void onClick(View v) {
 				calculate();
 			}
-		});
-		
-		btnWolframAlpha.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				wolframAlphaSearch();
-			}
-
-			
 		});
 		
 		btnClear.setOnClickListener(new View.OnClickListener() {
